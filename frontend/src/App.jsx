@@ -1052,8 +1052,7 @@ export default function App() {
   useEffect(() => {
     if (!isExploring) return
     setLoading(true)
-    fetch(`http://localhost:3000/api/provinsi?hewan=${hewan}&tahun=${tahun}`)
-      .then(r => r.json())
+    fetch(`http://localhost:3000/api/provinsi?hewan=${hewan}&tahun=${tahun}`)  .then(r => r.json())
       .then(data => {
         setProvinsiData(data)
         provinsiDataRef.current = data

@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const pool = require('./db');
 
 const app = express();
 
-app.use(cors());
+app.use(cors())
 
 app.get('/', (req, res) => {
     res.send('WebGIS Peternakan Berjalan');
@@ -16,11 +17,13 @@ app.get('/api/provinsi', async (req, res) => {
 
         const { hewan, tahun } = req.query
 
+       
+
         let query = `
-            SELECT
+             SELECT
                 nama_provinsi,
                 produksi
-            FROM produksi_ternak
+            FROM "produksi_ternak "
             WHERE 1=1
         `
 
@@ -108,20 +111,6 @@ app.get('/api/populasi', async (req, res) => {
 
 })
 
-
-
-app.get('/api/kabupaten', async (req, res) => {
-    try {
-        const result = await pool.query(
-            'SELECT * FROM kabupaten_jabar'
-        );
-
-        res.json(result.rows);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error database');
-    }
-});
 
 const PORT = process.env.PORT || 3000;
 
